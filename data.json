@@ -1,0 +1,479 @@
+{
+    "energy_types": {
+        "Grass": {
+            "main_color": "#4CAF50",
+            "sub_color": "#6ABF84",
+            "weak_resist_color": "green",
+            "card_nr": 30003
+        },
+        "Fire": {
+            "main_color": "#E53935",
+            "sub_color": "#FF4D4D",
+            "weak_resist_color": "red",
+            "card_nr": 30002
+        },
+        "Water": {
+            "main_color": "#2979FF",
+            "sub_color": "#4A90D9",
+            "weak_resist_color": "#0000FF",
+            "card_nr": 30006
+        },
+        "Fighting": {
+            "main_color": "#8D6E63",
+            "sub_color": "#BDAFA0",
+            "weak_resist_color": "#5C4033",
+            "card_nr": 30001
+        },
+        "Psychic": {
+            "main_color": "#BA68C8",
+            "sub_color": "#CFA3D9",
+            "weak_resist_color": "#BF40BF",
+            "card_nr": 30005
+        },
+        "Lightning": {
+            "main_color": "#FDD835",
+            "sub_color": "#FFF069",
+            "weak_resist_color": "yellow",
+            "card_nr": 30004
+        },
+        "Colorless": {
+            "main_color": "gray",
+            "sub_color": "#cccccc",
+            "weak_resist_color": "white",
+            "card_nr": false
+        },
+        "Darkness": {
+            "main_color": "#003f3f",
+            "sub_color": "#0b7070",
+            "weak_resist_color": "#003f3f",
+            "card_nr": 30007
+        },
+        "Metal": {
+            "main_color": "#C0C0C0",
+            "sub_color": "#828282",
+            "weak_resist_color": "dark_gray",
+            "card_nr": 30008
+        }
+    },
+    "rarity_format": {
+        "Common": {
+            "color": "#4CAF50",
+            "symbol": " ●",
+            "name_color": "white"
+        },
+        "Uncommon": {
+            "color": "#2196F3",
+            "symbol": " ♦",
+            "name_color": "white"
+        },
+        "Rare": {
+            "color": "#fcd732",
+            "symbol": " ☆",
+            "name_color": "yellow"
+        },
+        "Rare Holo": {
+            "color": "#FFC107",
+            "symbol": " ★",
+            "name_color": "aqua"
+        },
+        "Rare Holo EX": {
+            "color": "#C0C0C0",
+            "symbol": " ★",
+            "name_color": "light_purple"
+        },
+        "Rare Holo Star": {
+            "color": "#D4AF37",
+            "symbol": " ⁂",
+            "name_color": "light_purple"
+        },
+        "Rare Secret": {
+            "color": "#9966CC",
+            "symbol": " ★",
+            "name_color": "light_purple"
+        },
+        "Rare Shining": {
+            "color": "red",
+            "symbol": " ⁂",
+            "name_color": "light_purple"
+        },
+        "Promo": {
+            "color": "black",
+            "symbol": " ✬",
+            "name_color": "aqua"
+        }
+    },
+    "rarity_weights": {
+        "base1": {
+            "Rare Holo": 3,
+            "Rare Secret": 0,
+            "Rare Shining": 0
+        },
+        "base2": {
+            "Rare Holo": 3,
+            "Rare Secret": 0,
+            "Rare Shining": 0
+        },
+        "base3": {
+            "Rare Holo": 3,
+            "Rare Secret": 0,
+            "Rare Shining": 0
+        },
+        "base4": {
+            "Rare Holo": 3,
+            "Rare Secret": 0,
+            "Rare Shining": 0
+        },
+        "base5": {
+            "Rare Holo": 3,
+            "Rare Secret": 72,
+            "Rare Shining": 0
+        },
+        "gym1": {
+            "Rare Holo": 3,
+            "Rare Secret": 0,
+            "Rare Shining": 0
+        },
+        "gym2": {
+            "Rare Holo": 3,
+            "Rare Secret": 0,
+            "Rare Shining": 0
+        },
+        "neo1": {
+            "Rare Holo": 3,
+            "Rare Secret": 0,
+            "Rare Shining": 0
+        },
+        "neo2": {
+            "Rare Holo": 3,
+            "Rare Secret": 0,
+            "Rare Shining": 0
+        },
+        "neo3": {
+            "Rare Holo": 3,
+            "Rare Secret": 0,
+            "Rare Shining": 12
+        },
+        "neo4": {
+            "Rare Holo": 3,
+            "Rare Secret": 0,
+            "Rare Shining": 18
+        },
+        "base6": {
+            "Rare Holo": 3,
+            "Rare Secret": 0,
+            "Rare Shining": 0
+        },
+        "ecard1": {
+            "Rare Holo": 3,
+            "Rare Secret": 0,
+            "Rare Shining": 0,
+            "Common": -1
+        },
+        "ecard2": {
+            "Rare Holo": 3,
+            "Rare Secret": 36,
+            "Rare Shining": 0,
+            "Common": -1
+        },
+        "ecard3": {
+            "Rare Holo": 3,
+            "Rare Secret": 16,
+            "Rare Shining": 0,
+            "Common": -1
+        }
+    },
+    "sets": {
+        "base1": {
+            "name": "Base Set",
+            "date": "January 9, 1999",
+            "color": "#104bc2",
+            "custom_model_data": [101, 102, 103],
+            "max_uses": 10,
+            "deck_set": true,
+            "weight": 10000
+        },
+        "base2": {
+            "name": "Jungle",
+            "date": "June 16, 1999",
+            "color": "#4dbd4d",
+            "custom_model_data": [201, 202, 203],
+            "max_uses": 10,
+            "deck_set": true,
+            "weight": 9000
+        },
+        "base3": {
+            "name": "Fossil",
+            "date": "October 10, 1999",
+            "color": "#d2c6b0",
+            "custom_model_data": [301, 302, 303],
+            "max_uses": 10,
+            "deck_set": true,
+            "weight": 8000
+        },
+        "base4": {
+            "name": "Base Set 2",
+            "date": "February 24, 2000",
+            "color": "#0099cc",
+            "custom_model_data": [401, 402, 403],
+            "max_uses": 9,
+            "deck_set": true,
+            "weight": 7000
+        },
+        "base5": {
+            "name": "Team Rocket",
+            "date": "April 24, 2000",
+            "color": "#330033",
+            "custom_model_data": [501, 502, 503],
+            "max_uses": 9,
+            "deck_set": true,
+            "weight": 5000
+        },
+        "gym1": {
+            "name": "Gym Heroes",
+            "date": "August 14, 2000",
+            "color": "#ffd700",
+            "custom_model_data": [601, 602, 603],
+            "max_uses": 8,
+            "deck_set": true,
+            "weight": 3500
+        },
+        "gym2": {
+            "name": "Gym Challenge",
+            "date": "October 16, 2000",
+            "color": "#800080",
+            "custom_model_data": [701, 702, 703],
+            "max_uses": 8,
+            "deck_set": true,
+            "weight": 1000
+        },
+        "neo1": {
+            "name": "Neo Genesis",
+            "date": "December 16, 2000",
+            "color": "#888a87",
+            "custom_model_data": [801, 802, 803],
+            "max_uses": 7,
+            "deck_set": true,
+            "weight": 700
+        },
+        "neo2": {
+            "name": "Neo Discovery",
+            "date": "June 1, 2001",
+            "color": "#8B4513",
+            "custom_model_data": [901, 902, 903],
+            "max_uses": 6,
+            "deck_set": true,
+            "weight": 500
+        },
+        "neo3": {
+            "name": "September 21, 2001",
+            "date": "August 22, 2005",
+            "color": "#FF0000",
+            "custom_model_data": [1001, 1002, 1003],
+            "max_uses": 5,
+            "deck_set": true,
+            "weight": 350
+        },
+        "neo4": {
+            "name": "Neo Destiny",
+            "date": "February 28, 2002",
+            "color": "#800080",
+            "custom_model_data": [1101, 1102, 1103],
+            "max_uses": 3,
+            "deck_set": true,
+            "weight": 200
+        },
+        "base6": {
+            "name": "Legendary Collection",
+            "date": "May 24, 2002",
+            "color": "#5e6cd1",
+            "custom_model_data": [1201, 1202, 1203],
+            "max_uses": 2,
+            "deck_set": true,
+            "weight": 150
+        },
+        "ecard1": {
+            "name": "Expedition Base Set",
+            "date": "September 15, 2002",
+            "color": "#d1c95e",
+            "custom_model_data": [1301, 1302, 1303],
+            "max_uses": 1,
+            "deck_set": true,
+            "weight": 100
+        },
+        "ecard2": {
+            "name": "Aquapolis",
+            "date": "January 15, 2003",
+            "color": "#4632a8",
+            "custom_model_data": [1401, 1402, 1403],
+            "max_uses": 1,
+            "deck_set": true,
+            "weight": 70
+        },
+        "ecard3": {
+            "name": "Skyridge",
+            "date": "May 12, 2003",
+            "color": "#378a3e",
+            "custom_model_data": [1501, 1502, 1503],
+            "max_uses": 1,
+            "deck_set": true,
+            "weight": 50
+        },
+        "basep": {
+            "name": "Wizards Black Star Promos",
+            "date": "July 1999 - March 2003",
+            "color": "#9fd0e0",
+            "custom_model_data": [20],
+            "max_uses": 99,
+            "deck_sets": false,
+            "weight":0
+        }
+    },
+    "trainer_names": {
+        "Team Aqua's ": "#007FFF",
+        "Team Magma's ": "#FF4500",
+        "Rocket's ": "#333333",
+        "Team Rocket's ": "#333333",
+        "Holon's ": "#FFA500",
+        "Dark ": "dark_gray",
+        "Blaine's ": "#ff6666",
+        "Brock's ": "#CD853F",
+        "Erika's ": "#32cd32",
+        "Lt. Surge's ": "#ffff99",
+        "Misty's ": "#1e90ff",
+        "Sabrina's ": "#cf19cf",
+        "Giovanni's ": "dark_gray",
+        "Koga's ": "#24cc14",
+        "Shining ": "#eff707"
+    },
+    "generations": {
+        "gen_1": [
+            "base1", "base2", "base3", "base4", "base5", "gym1", "gym2"
+        ],
+        "gen_2": [
+            "neo1", "neo2", "neo3", "neo4", "base6",
+            "ecard1", "ecard2", "ecard3"
+        ]
+    },
+    "card_amount": {
+        "base1": {
+            "Common": 5,
+            "Uncommon": 3,
+            "Rare": 0,
+            "Reverse": 0,
+            "Premium": 1,
+            "Energy": 2
+        },
+        "base2": {
+            "Common": 7,
+            "Uncommon": 3,
+            "Rare": 0,
+            "Reverse": 0,
+            "Premium": 1,
+            "Energy": 0
+        },
+        "base3": {
+            "Common": 7,
+            "Uncommon": 3,
+            "Rare": 0,
+            "Reverse": 0,
+            "Premium": 1,
+            "Energy": 0
+        },
+        "base4": {
+            "Common": 5,
+            "Uncommon": 3,
+            "Rare": 0,
+            "Reverse": 0,
+            "Premium": 1,
+            "Energy": 2
+        },
+        "base5": {
+            "Common": 7,
+            "Uncommon": 3,
+            "Rare": 0,
+            "Reverse": 0,
+            "Premium": 1,
+            "Energy": 0
+        },
+        "gym1": {
+            "Common": 6,
+            "Uncommon": 3,
+            "Rare": 0,
+            "Reverse": 0,
+            "Premium": 1,
+            "Energy": 1
+        },
+        "gym2": {
+            "Common": 6,
+            "Uncommon": 3,
+            "Rare": 0,
+            "Reverse": 0,
+            "Premium": 1,
+            "Energy": 1
+        },
+        "neo1": {
+            "Common": 6,
+            "Uncommon": 3,
+            "Rare": 0,
+            "Reverse": 0,
+            "Premium": 1,
+            "Energy": 1
+        },
+        "neo2": {
+            "Common": 7,
+            "Uncommon": 3,
+            "Rare": 0,
+            "Reverse": 0,
+            "Premium": 1,
+            "Energy": 0
+        },
+        "neo3": {
+            "Common": 7,
+            "Uncommon": 3,
+            "Rare": 0,
+            "Reverse": 0,
+            "Premium": 1,
+            "Energy": 0
+        },
+        "neo4": {
+            "Common": 7,
+            "Uncommon": 3,
+            "Rare": 0,
+            "Reverse": 0,
+            "Premium": 1,
+            "Energy": 0
+        },
+        "base6": {
+            "Common": 6,
+            "Uncommon": 3,
+            "Rare": 0,
+            "Reverse": 1,
+            "Premium": 1,
+            "Energy": 0
+        },
+        "ecard1": {
+            "Common": 4,
+            "Uncommon": 2,
+            "Rare": 1,
+            "Reverse": 1,
+            "Premium": 1,
+            "Energy": 0
+        },
+        "ecard2": {
+            "Common": 4,
+            "Uncommon": 2,
+            "Rare": 1,
+            "Reverse": 1,
+            "Premium": 1,
+            "Energy": 0
+        },
+        "ecard3": {
+            "Common": 4,
+            "Uncommon": 2,
+            "Rare": 1,
+            "Reverse": 1,
+            "Premium": 1,
+            "Energy": 0
+        }
+    }
+}
