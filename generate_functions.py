@@ -68,7 +68,6 @@ def type_rares_functions():
                     file.write(line + '\n')
 
 
-
 if __name__ == '__main__':
     flip_card_lines = []
     initiate_set_lines = []

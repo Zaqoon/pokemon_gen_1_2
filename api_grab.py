@@ -4,20 +4,18 @@ from pokemontcgsdk import RestClient
 from poke_data import rarity_weights
 from poke_data import sets
 from poke_data import generations
+from poke_data import Card_Data
+
+from dotenv import load_dotenv
 
 import re
 import json
 import os
 import shutil
 
-from poke_data import Card_Data
-
-from dotenv import load_dotenv
 
 load_dotenv()
-
 api_key = os.getenv("API_KEY")
-
 RestClient.configure(api_key)
 
 target_set_list = [
