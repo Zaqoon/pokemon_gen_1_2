@@ -86,10 +86,9 @@ if __name__ == '__main__':
         os.makedirs(directory)
         booster = booster_score[set]
         custom_data = set + ':1'
-        lines = []
-        lines.append(template["set_score"] % booster_score[set])
-        lines.append(template["playsound"])
-        lines.append(template["clear_booster"] % (custom_data, custom_data))
+
+        lines = [template["set_score"] % booster_score[set], template["playsound"],
+                 template["clear_booster"] % (custom_data, custom_data)]
 
         # Common cards
         pull_rate = pull_rate_dict[set]["Common"]

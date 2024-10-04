@@ -265,8 +265,8 @@
             "weight": 500
         },
         "neo3": {
-            "name": "September 21, 2001",
-            "date": "August 22, 2005",
+            "name": "Neo Revelation",
+            "date": "September 21, 2001",
             "color": "#FF0000",
             "custom_model_data": [1001, 1002, 1003],
             "max_uses": 5,

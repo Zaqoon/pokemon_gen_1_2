@@ -216,22 +216,23 @@ def add_pokemon_cards(evolution_names:List[str], pokemon_type:str, sub_type:str,
         for energy_type in [pokemon_type, sub_type]
     }
 
-    # 2 Pools:
-    #   Total weight of each pool
-    #   Each card has its own unique weight
-    #   Want to find multiplier (M) and multiply each weight so the total weight of pool A == 60% of the total weight of both pools combined
+    weight_odds = {
+        pokemon_type: 0.6,
+        sub_type:     0.4
+    }
 
-    #   Solution: Total weight * 10, pool A * 0.4, pool B * 0.6
+    multiplier = total_weight[pokemon_type] / total_weight[sub_type]
 
-    multiplier = (3 * total_weight[pokemon_type]) / (2 * total_weight[sub_type])
-    print(f'M: {multiplier}')
-    weight_dict[pokemon_type] = [weight * multiplier for weight in weight_dict[pokemon_type]]
+    # Make the total sub_type weight == the total pokemon_type weight
+    weight_dict[sub_type] = [weight * multiplier for weight in weight_dict[sub_type]]
+
+    # Adjust weights to match the odds
+    for poke_type in weight_odds:
+        multiplier = weight_odds[poke_type]
+        weight_odds[poke_type] = [weight * multiplier for weight in weight_dict[poke_type]]
 
     pool = [card for key in [pokemon_type, sub_type] for card in pokemon_data[gen][key][rarity]]
-    dummy_pool = [card.name for card in pool]
-    print(dummy_pool)
     weight_list = [weight for sublist in weight_dict.values() for weight in sublist]
-    print(weight_list)
 
     while added_cards < card_amount[rarity]['Unique Cards']:
         card = random.choices(pool, weights=weight_list, k=1)[0]
@@ -285,59 +286,63 @@ def get_trainer_cards(deck_dict: dict, gen: str) -> dict:
     return deck_dict
 
 
-def energy_cards(deck_type, deck_dict) -> dict:
+def energy_cards(main_type, sub_type, deck_dict) -> dict:
     energies = []
+
     def random_energy(energies:List[str]) -> str:
         if not energies:
-            energies = [energy for energy in energy_data if energy not in ['Darkness', 'Metal', deck_type]]
+            energies = [energy for energy in energy_data if energy not in ['Darkness', 'Metal', main_type, sub_type]]
         energy = energies.pop(random.randint(0, len(energies) - 1))
         
         return energy
-    
+
+    if sub_type == 'Colorless':
+        sub_type = random_energy(energies)
+
     energy_dict = {
         "Grass": {
             "energy_entry": 'Grass',
-            "type_sub_entry": 'Fighting',
+            "type_sub_entry": sub_type,
             "color": "#4CAF50"
         },
         "Fire": {
             "energy_entry": 'Fire',
-            "type_sub_entry": 'Lightning',
+            "type_sub_entry": sub_type,
             "color": "#E53935"
         },
         "Water": {
             "energy_entry": 'Water',
-            "type_sub_entry": 'Psychic',
+            "type_sub_entry": sub_type,
             "color": "#2979FF"
         },
         "Fighting": {
             "energy_entry": 'Fighting',
-            "type_sub_entry": random_energy(energies),
+            "type_sub_entry": sub_type,
             "color": "#8D6E63"
         },
         "Lightning": {
             "energy_entry": 'Lightning',
-            "type_sub_entry": random_energy(energies),
+            "type_sub_entry": sub_type,
             "color": "#FDD835"
         },
         "Psychic": {
             "energy_entry": 'Psychic',
-            "type_sub_entry": random_energy(energies),
+            "type_sub_entry": sub_type,
             "color": "#BA68C8"
         },
         "Colorless": {
-            "energy_entry": random_energy(energies),
+            "energy_entry": sub_type,
             "type_sub_entry": random_energy(energies),
             "color": "#003f3f"
         },
         "Darkness": {
             "energy_entry": 'Darkness',
-            "type_sub_entry": random_energy(energies),
+            "type_sub_entry": sub_type,
             "color": "#003f3f"
         },
         "Metal": {
             "energy_entry": 'Metal',
-            "type_sub_entry": random_energy(energies),
+            "type_sub_entry": sub_type,
             "color": "#C0C0C0"
         }
     }
@@ -345,12 +350,12 @@ def energy_cards(deck_type, deck_dict) -> dict:
     stack_dict = {0: {'min': 15, 'max': 17}, 1: {'min': 7, 'max': 9}}
     for i in range(0, 2):
         if i == 0:
-            energy_entry = energy_dict[deck_type]['energy_entry']
+            energy_entry = energy_dict[main_type]['energy_entry']
             energy = energy_data[energy_entry]
         else:
-            energy_entry = energy_dict[deck_type]["type_sub_entry"]
+            energy_entry = energy_dict[main_type]["type_sub_entry"]
             energy = energy_data[energy_entry]
-        if deck_type in ["Darkness", "Metal"] and i == 0:
+        if main_type in ["Darkness", "Metal"] and i == 0:
             stack_min = 3
             stack_max = 5
         else:
@@ -427,7 +432,7 @@ def deck(deck_amount: int, gen: str) -> dict:
         rare_card_string = f"{{\"custom_name\":'{{\"text\":\"Holographic {deck_type} Card\",\"color\":\"aqua\",\"italic\":false}}',\"lore\":['{{\"text\":\"Right click to reveal card.\"}}'],\"custom_model_data\":1,\"enchantment_glint_override\":true,\"custom_data\":{{{deck_type.lower()}_rares_{gen_string}:1b}}}}"
         deck_dict = add_to_deck(deck_dict, 1, 1, rare_card_string, "rare_card_dict")
         deck_dict = get_trainer_cards(deck_dict, gen)
-        deck_dict = energy_cards(deck_type, deck_dict)
+        deck_dict = energy_cards(deck_type, sub_type, deck_dict)
         deck_dict = fix_dict(deck_dict)
 
         for deck in decks:
