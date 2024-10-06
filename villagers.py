@@ -637,6 +637,7 @@ def replace_villager_trades(num_files:int, profession:str, gen:str) -> None:
         'gen_2': 'savanna'
     }
     biome = biome_dict[gen]
+
     function_dict = {
         'min': 'scoreboard players set $min random 1',
         'max': f'scoreboard players set $max random {num_files - 1}',
@@ -646,6 +647,7 @@ def replace_villager_trades(num_files:int, profession:str, gen:str) -> None:
                    f'nbt={{VillagerData:{{type:"minecraft:{biome}", profession:"minecraft:{profession}"}}}}] '
                    f'Offers.Recipes set value []'
     }
+
     gen_string = gen.replace('_', '')
     function_path = f"{gen_string}_{profession_dict[profession]}:"
     path = f"{gen}/functions/replace_villager_{profession_dict[profession]}_{gen_string}.mcfunction"
