@@ -35,7 +35,9 @@ trainer_data = {
 energy_data = {}
 
 data_strings = {
-    "data_modify_dict": "execute in the_nether as @p[x=-6363,y=98,z=13745,limit=1,sort=nearest] at @s run data modify entity @e[type=villager,limit=1,sort=nearest,nbt={VillagerData:{profession:\"minecraft:%s\"}}] Offers.Recipes append value ",
+    "data_modify_dict": "execute in the_nether as @p[x=-6363,y=98,z=13745,limit=1,sort=nearest] at @s run "
+                        "data modify entity @e[type=villager,limit=1,sort=nearest,"
+                        "nbt={VillagerData:{profession:\"minecraft:%s\"}}] Offers.Recipes append value ",
     "card_dict": '''{id: "minecraft:filled_map",count: %s,components: %s}''',
     "rare_card_dict": '''{id: "minecraft:carrot_on_a_stick",count: %s,components: %s}'''
 }
@@ -45,7 +47,8 @@ deck_color = {"Grass": "green", "Fire": "red", "Water": "blue", "Fighting": "bro
 
 weights = [sets[key]["weight"] for key in sets]
 
-predicate_list = ["Blaine's ", "Brock's ", "Erika's ", "Lt. Surge's ", "Misty's ", "Rocket's ", "Sabrina's ", "Giovanni's ", "Koga's ", "Shining ",
+predicate_list = ["Blaine's ", "Brock's ", "Erika's ", "Lt. Surge's ", "Misty's ", "Rocket's ",
+                  "Sabrina's ", "Giovanni's ", "Koga's ", "Shining ",
                   "Team Aqua's ", "Team Magma's ", "Holon's ", "Dark "]
 
 
@@ -374,7 +377,8 @@ def deck(deck_amount: int, gen: str) -> dict:
     for i in range(1, deck_amount + 1):
         decks[f"Deck{i}"] = None
 
-    custom_model_data_dict = {"Grass": 101, "Fire": 102, "Water": 103, "Fighting": 5, "Lightning": 14, "Psychic": 9, "Colorless": 16, "Darkness": 1, "Metal": 3}
+    custom_model_data_dict = {"Grass": 101, "Fire": 102, "Water": 103, "Fighting": 5, "Lightning": 14, "Psychic": 9,
+                              "Colorless": 16, "Darkness": 1, "Metal": 3}
     deck_types = ["Grass", "Fire", "Water", "Fighting", "Lightning", "Psychic", "Colorless"]
 
     deck_weight = {"Grass": 300, "Fire": 300, "Water": 300, "Fighting": 150,
@@ -403,6 +407,10 @@ def deck(deck_amount: int, gen: str) -> dict:
         del deck_weight[deck_type]
         del sub_deck_weight[sub_type]
 
+        not_compatible = ['Fighting', 'Lightning']
+        if gen == 'gen_1' and deck_type in not_compatible and sub_type in not_compatible:
+            continue
+
         deck_dict = {
             "maxUses": 1,
             "buy": {
@@ -418,6 +426,7 @@ def deck(deck_amount: int, gen: str) -> dict:
                 "components": {
                     "custom_name": f'{{"bold":true,"color":"{type_hex[deck_type]}",'
                                    f'"italic":false,"text":"{deck_type} Deck"}}',
+                    "lore": f'[{{"italic":false,"text":"Generation {gen.replace("gen_","")}"}}',
                     "custom_model_data": custom_model_data_dict[deck_type],
                     "bundle_contents": []
                 }
@@ -444,13 +453,23 @@ def deck(deck_amount: int, gen: str) -> dict:
 
 
 def promo() -> str:
-    promo_dict = """{maxUses:9,buy:{id:"minecraft:emerald",count:1,components:{"minecraft:custom_name":'{"color":"light_purple","italic":false,"text":"Star"}',"minecraft:custom_model_data":4,"minecraft:custom_data":{redstar:1b}}},sell:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_name":'{"bold":true,"italic":false,"text":"Promo Pack"}',"minecraft:lore":['{"color":"#9fd0e0","italic":false,"text":"Wizards Black Star Promos"}','{"text":"July 1999 - March 2003","color":"dark_purple","italic":true}'],"minecraft:custom_model_data":10,"minecraft:custom_data":{basep:1}}}}"""
-    
+    promo_dict = """{maxUses:9,buy:{id:"minecraft:emerald",count:1,components:{"minecraft:custom_name":\
+    '{"color":"light_purple","italic":false,"text":"Star"}',"minecraft:custom_model_data":4,"minecraft:custom_data":\
+    {redstar:1b}}},sell:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_name":\
+    '{"bold":true,"italic":false,"text":"Promo Pack"}',"minecraft:lore":['{"color":"#9fd0e0","italic":false,"text":\
+    "Wizards Black Star Promos"}','{"text":"July 1999 - March 2003","color":"dark_purple","italic":true}'],\
+    "minecraft:custom_model_data":10,"minecraft:custom_data":{basep:1}}}}"""
+
     return data_strings["data_modify_dict"] % "cartographer" + promo_dict
 
 
 def booster(total_boosters:int, gen: str) -> List[str]:
-    trade_dict = """{maxUses:%s,buy:{id:"minecraft:emerald",count:1,components:{"minecraft:custom_name":'{"color":"yellow","italic":false,"text":"Ruby"}',"minecraft:custom_model_data":2,"minecraft:custom_data":{ruby:1b}}},sell:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_name":'{"bold":true,"italic":false,"text":"Booster Pack"}',"minecraft:lore":['{"text":"%s","color":"%s","italic":false}','{"text":"%s","color":"dark_purple","italic":true}'],"minecraft:custom_model_data":%s,"minecraft:custom_data":{%s:1}}}}"""
+    trade_dict = """{maxUses:%s,buy:{id:"minecraft:emerald",count:1,components:{"minecraft:custom_name":\
+    '{"color":"yellow","italic":false,"text":"Ruby"}',"minecraft:custom_model_data":2,"minecraft:custom_data":\
+    {ruby:1b}}},sell:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_name":\
+    '{"bold":true,"italic":false,"text":"Booster Pack"}',"minecraft:lore":['{"text":"%s","color":"%s","italic":false}',\
+    '{"text":"%s","color":"dark_purple","italic":true}'],"minecraft:custom_model_data":%s,\
+    "minecraft:custom_data":{%s:1}}}}"""
 
     trades = []
     exclude_set_cmd = []
@@ -540,6 +559,10 @@ def fix_dict(deck_dict):
     escaped_string = escaped_string.replace('}]"', "}]'")
     escaped_string = escaped_string.replace('"lore": \'[{', '"lore": [\'{')
     escaped_string = escaped_string.replace('"lore": [""]', '"lore": []')
+    escaped_string = escaped_string.replace(':True', ':true')
+    escaped_string = escaped_string.replace(':False', ':false')
+    escaped_string = escaped_string.replace(' 1"}\', "custom_model_data"', ' 1"}\'], "custom_model_data"')
+    escaped_string = escaped_string.replace(' 2"}\', "custom_model_data"', ' 2"}\'], "custom_model_data"')
 
     return escaped_string
 
