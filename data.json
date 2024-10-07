@@ -288,8 +288,8 @@
             "color": "#5e6cd1",
             "custom_model_data": [1201, 1202, 1203],
             "max_uses": 2,
-            "deck_set": true,
-            "weight": 150
+            "deck_set": false,
+            "weight": 0
         },
         "ecard1": {
             "name": "Expedition Base Set",
@@ -335,6 +335,7 @@
         "Team Rocket's ": "#333333",
         "Holon's ": "#FFA500",
         "Dark ": "dark_gray",
+        "Light ": "white",
         "Blaine's ": "#ff6666",
         "Brock's ": "#CD853F",
         "Erika's ": "#32cd32",

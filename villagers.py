@@ -37,7 +37,8 @@ energy_data = {}
 data_strings = {
     "data_modify_dict": "execute in the_nether as @p[x=-6363,y=98,z=13745,limit=1,sort=nearest] at @s run "
                         "data modify entity @e[type=villager,limit=1,sort=nearest,"
-                        "nbt={VillagerData:{profession:\"minecraft:%s\"}}] Offers.Recipes append value ",
+                        "nbt={VillagerData:{type:\"minecraft:%s\",profession:\"minecraft:%s\"}}] "
+                        "Offers.Recipes append value ",
     "card_dict": '''{id: "minecraft:filled_map",count: %s,components: %s}''',
     "rare_card_dict": '''{id: "minecraft:carrot_on_a_stick",count: %s,components: %s}'''
 }
@@ -452,7 +453,11 @@ def deck(deck_amount: int, gen: str) -> dict:
     return decks
 
 
-def promo() -> str:
+def promo(gen: str) -> str:
+    biome_type = {
+        'gen_1': 'swamp',
+        'gen_2': 'savanna'
+    }
     promo_dict = """{maxUses:9,buy:{id:"minecraft:emerald",count:1,components:{"minecraft:custom_name":\
     '{"color":"light_purple","italic":false,"text":"Star"}',"minecraft:custom_model_data":4,"minecraft:custom_data":\
     {redstar:1b}}},sell:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_name":\
@@ -460,7 +465,7 @@ def promo() -> str:
     "Wizards Black Star Promos"}','{"text":"July 1999 - March 2003","color":"dark_purple","italic":true}'],\
     "minecraft:custom_model_data":10,"minecraft:custom_data":{basep:1}}}}"""
 
-    return data_strings["data_modify_dict"] % "cartographer" + promo_dict
+    return data_strings["data_modify_dict"] % (biome_type[gen], "cleric") + promo_dict
 
 
 def booster(total_boosters:int, gen: str) -> List[str]:
@@ -470,6 +475,11 @@ def booster(total_boosters:int, gen: str) -> List[str]:
     '{"bold":true,"italic":false,"text":"Booster Pack"}',"minecraft:lore":['{"text":"%s","color":"%s","italic":false}',\
     '{"text":"%s","color":"dark_purple","italic":true}'],"minecraft:custom_model_data":%s,\
     "minecraft:custom_data":{%s:1}}}}"""
+
+    biome_type = {
+        'gen_1': 'swamp',
+        'gen_2': 'savanna'
+    }
 
     trades = []
     exclude_set_cmd = []
@@ -491,7 +501,7 @@ def booster(total_boosters:int, gen: str) -> List[str]:
     sorted_selected_sets = dict(sorted(selected_sets.items()))
     for cmd, ss in sorted_selected_sets.items():
         trade_str = trade_dict % (ss["max_uses"], ss["name"], ss["color"], ss["date"], cmd, ss["abbreviation"])
-        trade_str = data_strings["data_modify_dict"] % "cartographer" + trade_str
+        trade_str = data_strings["data_modify_dict"] % (biome_type[gen], "cleric") + trade_str
         trade_str = trade_str.replace("\n", "").replace("    ", "")
         trades.append(trade_str)
     
@@ -581,12 +591,18 @@ def construct_deck_files(total_files, total_decks, gen) -> None:
             shutil.rmtree(path)
         os.makedirs(path)
 
+    biome_type = {
+        'gen_1': 'swamp',
+        'gen_2': 'savanna'
+    }
+
     for i in range(1, total_files):
         print(f"Creating decks for set {i}")
         decks = deck(total_decks, gen)
+        gen_string = gen.replace('_', '')
     
         link_template = (f"execute in the_nether as @p[x=-6363,y=90,z=13745,limit=1,sort=nearest]"
-                         f" run function {gen}:decks%s/")
+                         f" run function {gen_string}_decks:decks%s/")
         links = []
         for index in range(1, total_decks):
             links.append(link_template % int(index + 1))
@@ -596,12 +612,12 @@ def construct_deck_files(total_files, total_decks, gen) -> None:
             file_path = path + f"/{i}"
             file_path = file_path + ".mcfunction"
             with open(file_path, "w") as file:
-                file.write(data_strings["data_modify_dict"] % "cleric" + decks[deck_name] + "\n")
+                file.write(data_strings["data_modify_dict"] % (biome_type[gen], "cartographer") + decks[deck_name] + "\n")
                 if n < len(paths) - 1:
                     file.write(links[n] + str(i))
             print(f"    Created deck {n + 1}")
     
-    replace_villager_trades(total_files, profession='cleric', gen=gen)
+    replace_villager_trades(total_files, profession='cartographer', gen=gen)
 
 
 def construct_booster_files(total_files, booster_amount, gen) -> None:
@@ -613,7 +629,7 @@ def construct_booster_files(total_files, booster_amount, gen) -> None:
     os.makedirs(directory)
     
     for i in range(1, total_files):
-        promos = promo()
+        promos = promo(gen)
         boosters = booster(booster_amount, gen)
 
         path = f'{directory}/{i}.mcfunction'
@@ -624,13 +640,13 @@ def construct_booster_files(total_files, booster_amount, gen) -> None:
                 file.write(b + '\n')
         print(f"Successfully created booster file {i}")
     
-    replace_villager_trades(total_files, profession='cartographer', gen=gen)
+    replace_villager_trades(total_files, profession='cleric', gen=gen)
 
 
 def replace_villager_trades(num_files:int, profession:str, gen:str) -> None:
     profession_dict = {
-        'cleric': 'decks',
-        'cartographer': 'boosters'
+        'cleric': 'boosters',
+        'cartographer': 'decks'
     }
     biome_dict = {
         'gen_1': 'swamp',
@@ -658,7 +674,7 @@ def replace_villager_trades(num_files:int, profession:str, gen:str) -> None:
             file.write(function + '\n')
         file.write('\n')
         for n in range(1, num_files):
-            function_path_dict = {'cleric': f'decks1/{n}', 'cartographer': str(n)}
+            function_path_dict = {'cartographer': f'decks1/{n}', 'cleric': str(n)}
             function_path_num = function_path + function_path_dict[profession]
             line = f'execute if score $out random matches {n} run function {function_path_num}'
             file.write(line + '\n')

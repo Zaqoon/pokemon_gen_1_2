@@ -49,9 +49,9 @@ def import_decks():
             f'{gen}/{gen_string}_boosters': f'{base_directory}/{gen_string}_boosters',
             f'{gen}/{gen_string}_decks': f'{base_directory}/{gen_string}_decks',
             f'{gen}/functions/replace_villager_decks_{gen_string}.mcfunction':
-                f'{base_directory}/expansions/functions/replace_villager_decks_{gen_string}.mcfunction',
+                f'{base_directory}/expansions/function/replace_villager_decks_{gen_string}.mcfunction',
             f'{gen}/functions/replace_villager_boosters_{gen_string}.mcfunction':
-                f'{base_directory}/expansions/functions/replace_villager_boosters_{gen_string}.mcfunction',
+                f'{base_directory}/expansions/function/replace_villager_boosters_{gen_string}.mcfunction',
             f'{gen}/functions/type_rares_{gen_string}': f'{base_directory}/type_rares_{gen_string}'
         }
 
