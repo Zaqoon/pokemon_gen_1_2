@@ -113,13 +113,20 @@ def count_cards() -> dict:
 
 def populate_energy_cards() -> None:
     entry_numbers = {
-        'energy': [0, 1, 2, 3, 4, 5],
-        'rare': [10, 11]
+        'energy': {
+            'path': 'gen_1/loot_tables/base1/energy.json',
+            'index': [0, 1, 2, 3, 4, 5]
+        },
+        'rare': {
+            'path': 'gen_2/loot_tables/ecard1/rare.json',
+            'index': [38, 39]
+        }
     }
+
     for rarity in entry_numbers:
-        with open(f'C:/Users/Andreas/Desktop/pip_code/loot_tables/ex1/{rarity}.json', 'r') as file:
+        with open(entry_numbers[rarity]['path'], 'r') as file:
             loot_table = json.load(file)
-        for entry_num in entry_numbers[rarity]:
+        for entry_num in entry_numbers[rarity]['index']:
             entry = loot_table['pools'][0]['entries'][entry_num]
             functions = entry['functions']
             data = {
