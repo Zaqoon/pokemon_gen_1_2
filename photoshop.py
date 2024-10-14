@@ -9,9 +9,6 @@ from pokemontcgsdk import RestClient
 
 from dotenv import load_dotenv
 
-import photoshop as ps
-from photoshop import Session
-
 import re
 
 import requests
@@ -26,8 +23,10 @@ gen2 = ["ecard1", "ecard2", "ecard3"]
 
 targetSetList = ["ex1", "ex2", "ex3", "np", "ex4", "ex5", "ex6", "ex7", "ex8", "ex9", "ex10", "ex11", "ex12", "ex13", "ex14", "ex15", "ex16"]
 # targetSetList = ["ex1"]
-allCard_Data = {"ex1": [], "ex2": [], "ex3": [], "np": [], "ex4": [], "ex5": [], "ex6": [], "ex7": [], "ex8": [], "ex9": [], "ex10": [], "ex11": [], "ex12": [], "ex13": [], "ex14": [], "ex15": [], "ex16": []}
+allCard_Data = {set_name: [] for set_name in targetSetList}
 
+for set_name in targetSetList:
+    allCard_Data[set_name] = []
 
 psApp = win32com.client.Dispatch("Photoshop.Application")
 
