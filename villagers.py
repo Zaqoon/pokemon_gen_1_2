@@ -152,6 +152,7 @@ def sort_card_weights() -> dict:
             for rarity in rarities:
                 villager_data_weights = [villager_data.weight for villager_data in pokemon_data[gen][pokemon_type][rarity]]
                 card_weights[gen][pokemon_type][rarity] = villager_data_weights
+
     return card_weights
 
 
@@ -243,6 +244,7 @@ def add_pokemon_cards(evolution_names:List[str], pokemon_type:str, sub_type:str,
         weight_odds[poke_type] = [weight * multiplier for weight in weight_dict[poke_type]]
 
     pool = [card for key in [pokemon_type, sub_type] for card in pokemon_data[gen][key][rarity]]
+
     weight_list = [weight for sublist in weight_dict.values() for weight in sublist]
 
     while added_cards < card_amount[rarity]['Unique Cards']:
@@ -398,7 +400,9 @@ def deck(deck_amount: int, gen: str) -> dict:
 
     sub_deck_type = deck_types[:]
     sub_deck_weight = deck_weight.copy()
-    
+
+    not_compatible = ['Fighting', 'Lightning']
+
     while decks[f"Deck{deck_amount}"] is None:
         deck_type = random.choices(deck_types, weights=list(deck_weight.values()))[0]
         deck_types.remove(deck_type)
@@ -415,7 +419,6 @@ def deck(deck_amount: int, gen: str) -> dict:
         del deck_weight[deck_type]
         del sub_deck_weight[sub_type]
 
-        not_compatible = ['Fighting', 'Lightning']
         if gen == 'gen_1' and deck_type in not_compatible and sub_type in not_compatible:
             continue
 
