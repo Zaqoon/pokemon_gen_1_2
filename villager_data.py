@@ -12,13 +12,13 @@ predicate_list = ["Blaine's ", "Brock's ", "Erika's ", "Lt. Surge's ", "Misty's 
 
 
 def extract_pokemon_name(functions:list) -> str:
-    pokemon_name = []
+    pokemon_name = ''
     for name in functions[1]['name']:
-        pokemon_name.append(name['text'])
+        pokemon_name += name['text']
         if name['text'] in predicate_list:
             continue
         else:
-            return ' '.join(pokemon_name)
+            return pokemon_name
 
 
 def extract_evolution_name(functions:list) -> str:
