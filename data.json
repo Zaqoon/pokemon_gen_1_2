@@ -216,7 +216,7 @@
             "color": "#0099cc",
             "custom_model_data": [401, 402, 403],
             "max_uses": 9,
-            "deck_set": true,
+            "deck_set": false,
             "weight": 7000
         },
         "base5": {
@@ -324,7 +324,7 @@
             "color": "#9fd0e0",
             "custom_model_data": [20],
             "max_uses": 99,
-            "deck_sets": false,
+            "deck_set": false,
             "weight":0
         }
     },

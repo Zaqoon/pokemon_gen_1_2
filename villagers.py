@@ -55,7 +55,7 @@ predicate_list = ["Blaine's ", "Brock's ", "Erika's ", "Lt. Surge's ", "Misty's 
 
 def populate_villager_data() -> None:
     for set in sets:
-        if set in ['basep', 'base4']:
+        if not sets[set]['deck_set']:
             continue
         gen = None
         for gen, set_names in generations.items():
