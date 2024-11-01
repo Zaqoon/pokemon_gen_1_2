@@ -255,7 +255,7 @@ def add_pokemon_cards(evolution_names:List[str], pokemon_type:str, sub_type:str,
 
         min = card_amount[rarity]['Stack Min']
         max = card_amount[rarity]['Stack Max']
-        components = fix_json(card.components)
+        components = card.components
      
         deck_dict = add_to_deck(deck_dict, min=min, max=max, components=components, item_type='card_dict')
         evolution_names.append(card.name)
@@ -293,7 +293,6 @@ def get_trainer_cards(deck_dict: dict, gen: str) -> dict:
         card_index = trainer_data[gen].index(random_card)
         weights[card_index] = 0
         components = random_card.components
-        components = fix_json(components)
         deck_dict = add_to_deck(deck_dict, min=2, max=4, components=components, item_type="card_dict")
 
     return deck_dict
@@ -376,7 +375,6 @@ def energy_cards(main_type, sub_type, deck_dict) -> dict:
             stack_max = stack_dict[i]['max']
 
         components = energy.components
-        components = fix_json(components)
         deck_dict = add_to_deck(deck_dict, stack_min, stack_max, components, "card_dict")
 
     return deck_dict
@@ -518,28 +516,6 @@ def booster(total_boosters:int, gen: str) -> List[str]:
     return trades
 
 
-def fix_json(components):
-    components = json.dumps(components)
-    components = re.sub(r'\["\'{', r"'[{", components)
-    components = re.sub(r"}'\"]", r"}]'", components)
-
-    components = re.sub(r'\["\'\[{', r"['[{", components)
-    components = re.sub(r'}]\'"]', r"}]']", components)
-
-    components = re.sub(r"'text': '((?:[^'\\]|\\.)*)'", r'"text":"\1"', components)
-    components = re.sub(r"'color': '((?:[^'\\]|\\.)*)'", r'"color":"\1"', components)
-    components = re.sub(r"'bold': ((?:[^'\\]|\\.)*)", r'"bold":\1', components)
-    components = re.sub(r"'italic': ((?:[^'\\]|\\.)*)", r'"italic":\1', components)
-    components = re.sub(r"'underlined': ((?:[^'\\]|\\.)*)", r'"underlined":\1', components)
-    components = re.sub(r"'text': \\\"(.*?)\\\"", r'"text":"\1"', components)
-    components = re.sub(r"(\"text\":\s*\"(.*?)\")", lambda m: m.group(1).replace("'", "\\'"), components)
-    components = re.sub(r'"custom_data":\s*{([^}]+)}', 
-                    lambda m: re.sub(r'(\s*"[^"]+"\s*:\s*)1', r'\g<1>1b', m.group(0)), 
-                    components)
-
-    return components
-
-
 def fix_dict(deck_dict):
     # Convert deckDict to JSON string
     deckDictString = json.dumps(deck_dict)
@@ -556,9 +532,9 @@ def fix_dict(deck_dict):
     unquote = re.sub(r"\"sell\"", r"sell", unquote)
     unquote = re.sub(r"\"CustomModelData\"", r"CustomModelData", unquote)
     unquote = re.sub(r"\"Items\"", r"Items", unquote)
-    unquote = re.sub(r"\"Name\": \"\{\\\"text\\\":\\\"Sapphire\\\",\\\"italic\\\":false,\\\"color\\\":\\\"aqua\\\"\}\"", r"Name: '{\"text\":\"Sapphire\",\"italic\":false,\"color\":\"aqua\"}'", unquote)
-    unquote = re.sub(r"\"Name\": \"\{\\\"text\\\":\\\"Ruby\\\",\\\"italic\\\":false,\\\"color\\\":\\\"aqua\\\"\}\"", r"Name: '{\"text\":\"Ruby\",\"italic\":false,\"color\":\"yellow\"}'", unquote)
-    unquote = re.sub(r"\"Name\": \"\{\\\"text\\\":\\\"(.*?) Deck\\\",\\\"color\\\":\\\"(.*?)\\\",\\\"italic\\\":false\}\"",lambda match: f"Name: '{{\"text\":\"{match.group(1)} Deck\",\"color\":\"{match.group(2)}\",\"italic\":false}}'",unquote)
+    unquote = re.sub(r"\"Name\": \"\{\\\"text\\\":\\\"Sapphire\\\",\\\"italic\\\":false,\\\"color\\\":\\\"aqua\\\"}\"", r"Name: '{\"text\":\"Sapphire\",\"italic\":false,\"color\":\"aqua\"}'", unquote)
+    unquote = re.sub(r"\"Name\": \"\{\\\"text\\\":\\\"Ruby\\\",\\\"italic\\\":false,\\\"color\\\":\\\"aqua\\\"}\"", r"Name: '{\"text\":\"Ruby\",\"italic\":false,\"color\":\"yellow\"}'", unquote)
+    unquote = re.sub(r"\"Name\": \"\{\\\"text\\\":\\\"(.*?) Deck\\\",\\\"color\\\":\\\"(.*?)\\\",\\\"italic\\\":false}\"",lambda match: f"Name: '{{\"text\":\"{match.group(1)} Deck\",\"color\":\"{match.group(2)}\",\"italic\":false}}'",unquote)
     unquote = re.sub(r"}\", \"{", r"},{", unquote)
 
     unquote = re.sub(r"\"components\"", r"components", unquote)
