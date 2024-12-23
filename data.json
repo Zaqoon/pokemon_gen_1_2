@@ -298,7 +298,7 @@
             "custom_model_data": [1301, 1302, 1303],
             "max_uses": 1,
             "deck_set": true,
-            "weight": 100
+            "weight": 50
         },
         "ecard2": {
             "name": "Aquapolis",
@@ -307,7 +307,7 @@
             "custom_model_data": [1401, 1402, 1403],
             "max_uses": 1,
             "deck_set": true,
-            "weight": 70
+            "weight": 35
         },
         "ecard3": {
             "name": "Skyridge",
@@ -316,7 +316,7 @@
             "custom_model_data": [1501, 1502, 1503],
             "max_uses": 1,
             "deck_set": true,
-            "weight": 50
+            "weight": 25
         },
         "basep": {
             "name": "Wizards Black Star Promos",
