@@ -23,11 +23,25 @@ def get_prices(target) -> dict:
         cards = Card.where(q=f'set.id:{set}')
         sorted_cards = sorted(cards, key=sort_item)
         for card in sorted_cards:
-            prices = card.tcgplayer.prices
-            prices_dict[str(crd_nmbr)] = prices
+            try:
+                price = card.cardmarket.prices.trendPrice
+                price = euro_to_usd(price)
+            except AttributeError:
+                price = 0.01
+            prices_dict[str(crd_nmbr)] = price
             crd_nmbr += 1
+            print(f'{crd_nmbr}: {price}')
 
     return prices_dict
+
+
+def euro_to_usd(euro: float) -> float:
+    usd = euro * 0.96
+    usd = str(round(usd, 2))
+    if usd[-1] == '0':
+        usd = usd[:-1]
+
+    return float(usd)
 
 
 def write_to_file(price_dict: dict):
