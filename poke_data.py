@@ -704,6 +704,7 @@ class Card_Data:
             'large': card.images.large,
             'small': card.images.small
         }
+        self.prices = card.tcgplayer.prices
 
         if self.supertype != "Energy":
             self.hp = card.hp
