@@ -23,6 +23,7 @@ target_set_list = [
     "neo1", "neo2", "neo3", "neo4", "base6",
     "ecard1", "ecard2", "ecard3", "basep"
 ]
+target_set_list=['base1']
 
 card_data = {set_name: [] for set_name in target_set_list}
 

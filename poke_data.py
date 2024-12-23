@@ -323,7 +323,7 @@ def weakness_and_resistance(weaknesses: list, resistances: list,
 
         for weakness in weaknesses:
             color = energy_types[weakness.type]["main_color"]
-            symbol = '● ' if weakness == weaknesses[-1] else '●'
+            symbol = '●   ' if weakness == weaknesses[-1] else '●'
             tag_line = tag_line_generator(text=symbol, color=color, underlined=False, bold=False, italic=False)
             tag_line_list.append(tag_line)
 
@@ -353,7 +353,7 @@ def weakness_and_resistance(weaknesses: list, resistances: list,
         tag_line_list.append(tag_line)
 
         # Price
-        tag_line = tag_line_generator(text=price_string, color='#85BB65', underlined=False, bold=False, italic=False)
+        tag_line = tag_line_generator(text=price_string, color='#4caf50', underlined=False, bold=False, italic=False)
         tag_line_list.append(tag_line)
 
     lore_lines.append(tag_line_list)
@@ -369,8 +369,8 @@ def weakness_resistance_spaces(weakness_string: str, resistance_string: str, pri
         spaces += " "
         width += + 4.2
 
-    if len(spaces) > 0:
-        spaces = spaces[:-1]
+    if len(weakness_string) > 1 and len(spaces) > 1:
+        spaces = spaces[:-3]
 
     return spaces
 
@@ -569,8 +569,7 @@ def format_pokemon_card(card) -> list:
     if card.flavor_text is not None:
         lore_lines = flavor_text_lines(card.flavor_text, lore_lines)
     # Weakness and resistance
-    elif card.weaknesses is not None or card.resistances is not None:
-        lore_lines = weakness_and_resistance(card.weaknesses, card.resistances, type_color, lore_lines)
+    lore_lines = weakness_and_resistance(card.weaknesses, card.resistances, type_color, lore_lines, card.price)
     # Printed total, set, release year
     lore_lines = number_set_release_line(card, lore_lines)
 
