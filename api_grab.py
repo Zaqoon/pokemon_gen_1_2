@@ -26,6 +26,9 @@ target_set_list = [
 
 card_data = {set_name: [] for set_name in target_set_list}
 
+with open('prices.json', 'r') as file:
+    price_dict = json.load(file)
+
 
 def weight_calculation(rarity_dict: dict, set: str) -> dict:
     card_count = {'Common': 0, 'Rare': 0}
@@ -80,7 +83,8 @@ def populateCard_Data(target):
         cards = Card.where(q=f'set.id:{set}')
         sorted_cards = sorted(cards, key=sort_item)
         for card in sorted_cards:
-            current_card_data = Card_Data(card)
+            price = price_dict[str(crd_nmbr)]
+            current_card_data = Card_Data(card, price)
             current_card_data.generate_components()
             card_data[set].append(current_card_data)
             crd_nmbr += 1

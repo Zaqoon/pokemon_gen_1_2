@@ -304,10 +304,13 @@ def flavor_text_lines(flavor_text: str, lore_lines: list) -> list:
     return lore_lines
 
 
-def weakness_and_resistance(weaknesses: list, resistances: list, energy_color: str, lore_lines: list) -> list:
+def weakness_and_resistance(weaknesses: list, resistances: list,
+                            energy_color: str, lore_lines: list, price: float) -> list:
     tag_line_list = []
     weakness_string = ""
     resistance_string = ""
+    price_string = f'${price}'
+
     if weaknesses is not None:
         if len(weaknesses) > 1:
             weakness_string = " Weaknesses:"
@@ -350,9 +353,9 @@ def weakness_and_resistance(weaknesses: list, resistances: list, energy_color: s
     return lore_lines
 
 
-def weakness_resistance_spaces(weakness_string: str, resistance_string: str) -> str:
+def weakness_resistance_spaces(weakness_string: str, resistance_string: str, price_string: str) -> str:
     spaces = ""
-    string = weakness_string + resistance_string
+    string = weakness_string + resistance_string + price_string
     width = sum(letter_widths.get(char, 0) for char in string)
     while width + 4.2 <= 188:
         spaces += " "
@@ -679,7 +682,7 @@ class Card_Data:
     static_poke_num_cntr = 0
     promo_poke_num_cntr = 0
 
-    def __init__(self, card: Card) -> None:
+    def __init__(self, card: Card, price: float) -> None:
         if card.rarity is not None:
             if card.rarity == "Promo":
                 Card_Data.promo_poke_num_cntr += 1
@@ -704,7 +707,7 @@ class Card_Data:
             'large': card.images.large,
             'small': card.images.small
         }
-        self.prices = card.tcgplayer.prices
+        self.price = price
 
         if self.supertype != "Energy":
             self.hp = card.hp
