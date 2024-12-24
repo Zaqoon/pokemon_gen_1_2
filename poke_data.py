@@ -336,9 +336,6 @@ def weakness_and_resistance(weaknesses: list, resistances: list,
         if weaknesses is None:
             resistance_string = " " + resistance_string
 
-        resistance_str = resistance_string + " ".join(["●" for _ in resistances])
-        spaces = weakness_resistance_spaces(weakness_string, resistance_str, price_string)
-
         tag_line = tag_line_generator(text=resistance_string, color=energy_color, underlined=False, bold=False,
                                       italic=False)
         tag_line_list.append(tag_line)
@@ -348,13 +345,16 @@ def weakness_and_resistance(weaknesses: list, resistances: list,
             tag_line = tag_line_generator(text="● ", color=color, underlined=False, bold=False, italic=False)
             tag_line_list.append(tag_line)
 
-        # Spaces
-        tag_line = tag_line_generator(text=spaces, color=energy_color, underlined=False, bold=False, italic=False)
-        tag_line_list.append(tag_line)
+    # Spaces
+    resistance_str = resistance_string + " ".join(["●" for _ in resistances]) if resistances else resistance_string
+    spaces = weakness_resistance_spaces(weakness_string, resistance_str, price_string)
 
-        # Price
-        tag_line = tag_line_generator(text=price_string, color='#4caf50', underlined=False, bold=False, italic=False)
-        tag_line_list.append(tag_line)
+    tag_line = tag_line_generator(text=spaces, color=energy_color, underlined=False, bold=False, italic=False)
+    tag_line_list.append(tag_line)
+
+    # Price
+    tag_line = tag_line_generator(text=price_string, color='#4caf50', underlined=False, bold=False, italic=False)
+    tag_line_list.append(tag_line)
 
     lore_lines.append(tag_line_list)
 
