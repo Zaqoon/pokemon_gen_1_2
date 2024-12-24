@@ -25,12 +25,12 @@ def get_prices(target) -> dict:
         for card in sorted_cards:
             try:
                 price = card.cardmarket.prices.trendPrice
-                price = euro_to_usd(price)
+                converted_price = euro_to_usd(price)
             except AttributeError:
-                price = 0.01
-            prices_dict[str(crd_nmbr)] = price
+                converted_price = 0.01
+            prices_dict[str(crd_nmbr)] = converted_price
             crd_nmbr += 1
-            print(f'{crd_nmbr}: {price}')
+            print(f'{crd_nmbr}: {converted_price}')
 
     return prices_dict
 
