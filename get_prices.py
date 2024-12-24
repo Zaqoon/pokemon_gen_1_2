@@ -38,7 +38,9 @@ def get_prices(target) -> dict:
 def euro_to_usd(euro: float) -> float:
     usd = euro * 0.96
     usd = str(round(usd, 2))
-    if usd[-1] == '0':
+    while usd[-1] == '0' or usd[-1] == '.':
+        if len(usd) == 1:
+            break
         usd = usd[:-1]
 
     return float(usd)
