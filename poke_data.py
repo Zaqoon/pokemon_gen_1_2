@@ -692,7 +692,7 @@ class Card_Data:
     static_poke_num_cntr = 0
     promo_poke_num_cntr = 0
 
-    def __init__(self, card: Card, price: float) -> None:
+    def __init__(self, card: Card, price_dict: dict) -> None:
         if card.rarity is not None:
             if card.rarity == "Promo":
                 Card_Data.promo_poke_num_cntr += 1
@@ -717,7 +717,8 @@ class Card_Data:
             'large': card.images.large,
             'small': card.images.small
         }
-        self.price = price
+        if str(self.static_poke_num_cntr) in price_dict:
+            self.price = price_dict[str(self.static_poke_num_cntr)]
 
         if self.supertype != "Energy":
             self.hp = card.hp

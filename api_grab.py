@@ -76,18 +76,15 @@ def sort_item(card):
         return 0, '', 0, ''  # Default value if no match is found
 
 
-def populateCard_Data(target):
-    crd_nmbr = 32000
+def populate_data(target):
     for set in target:
         print(f"Populating cards from \"{set}\"")
         cards = Card.where(q=f'set.id:{set}')
         sorted_cards = sorted(cards, key=sort_item)
         for card in sorted_cards:
-            price = price_dict[str(crd_nmbr)]
-            current_card_data = Card_Data(card, price)
+            current_card_data = Card_Data(card, price_dict)
             current_card_data.generate_components()
             card_data[set].append(current_card_data)
-            crd_nmbr += 1
 
 
 def add_entry(poke_tag, weight_dict):
@@ -198,7 +195,7 @@ def deck_special_cards(type_specific_cards: dict) -> None:
 
 
 if __name__ == "__main__":
-    populateCard_Data(target_set_list)  # Populate data
+    populate_data(target_set_list)  # Populate data
 
     energy_list = [
         "Fighting Energy", "Fire Energy", "Grass Energy",
