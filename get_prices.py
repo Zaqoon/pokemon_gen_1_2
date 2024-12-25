@@ -31,10 +31,10 @@ def get_prices(target) -> dict:
                 converted_price = 0.01
             if card.rarity == 'Promo':
                 promo_nmbr += 1
-                nmbr = promo_nmbr + 66000
+                nmbr = promo_nmbr + 64000
             else:
                 crd_nmbr += 1
-                nmbr = crd_nmbr + 34000
+                nmbr = crd_nmbr + 32000
             prices_dict[str(nmbr)] = converted_price
             print(f'{nmbr}: {converted_price}')
 
