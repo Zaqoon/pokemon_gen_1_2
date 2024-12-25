@@ -36,7 +36,7 @@ def get_prices(target) -> dict:
 
 
 def euro_to_usd(euro: float) -> float:
-    usd = euro * 0.96
+    usd = euro * 1.04
     usd = str(round(usd, 2))
     while usd[-1] == '0' or usd[-1] == '.':
         if len(usd) == 1:
