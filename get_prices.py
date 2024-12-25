@@ -16,7 +16,8 @@ RestClient.configure(API_KEY)
 
 
 def get_prices(target) -> dict:
-    crd_nmbr = 32000
+    crd_nmbr = 0
+    promo_nmbr = 0
     prices_dict = {}
     for set in target:
         print(f"Populating cards from \"{set}\"")
@@ -28,9 +29,14 @@ def get_prices(target) -> dict:
                 converted_price = euro_to_usd(price)
             except AttributeError:
                 converted_price = 0.01
-            prices_dict[str(crd_nmbr)] = converted_price
-            crd_nmbr += 1
-            print(f'{crd_nmbr}: {converted_price}')
+            if card.rarity == 'Promo':
+                promo_nmbr += 1
+                nmbr = promo_nmbr + 66000
+            else:
+                crd_nmbr += 1
+                nmbr = crd_nmbr + 34000
+            prices_dict[str(nmbr)] = converted_price
+            print(f'{nmbr}: {converted_price}')
 
     return prices_dict
 
