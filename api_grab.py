@@ -82,6 +82,7 @@ def populate_data(target):
         cards = Card.where(q=f'set.id:{set}')
         sorted_cards = sorted(cards, key=sort_item)
         for card in sorted_cards:
+            print(card.name)
             current_card_data = Card_Data(card, price_dict)
             current_card_data.generate_components()
             card_data[set].append(current_card_data)
