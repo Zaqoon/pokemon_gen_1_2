@@ -180,7 +180,7 @@ def reverse_weights(set: str) -> dict:
 def deck_special_cards(type_specific_cards: dict) -> None:
     for loot_table in type_specific_cards:
         print(f"Creating loot table for {loot_table} Holo Cards ...")
-        file_directories = ['gen_1/type_rares', 'gen_2/type_rares']
+        file_directories = ['gen_1/type_rares_gen1', 'gen_2/type_rares_gen2']
         for directory in file_directories:
             if os.path.exists(directory):
                 shutil.rmtree(directory)
@@ -303,7 +303,7 @@ if __name__ == "__main__":
                         file.write(file_dict)
 
     # Rares for types in decks
-    file_directories = ['gen_1/type_rares', 'gen_2/type_rares']
+    file_directories = ['gen_1/type_rares_gen1', 'gen_2/type_rares_gen2']
     for directory in file_directories:
         if os.path.exists(directory):
             shutil.rmtree(directory)
@@ -313,7 +313,7 @@ if __name__ == "__main__":
         for loot_table in type_specific_cards[gen].keys():
             print(f"Creating loot table for {loot_table} Holo Cards ...")
             file_dict = {"type": "minecraft:chest", "pools": [{"rolls": 1, "entries": []}]}
-            with open(f"{gen}/type_rares/{loot_table.lower()}.json", "w") as file:
+            with open(f"{gen}/type_rares_{gen.replace('_','')}/{loot_table.lower()}.json", "w") as file:
                 for card_tag in type_specific_cards[gen][loot_table]:
                     weight = card_tag[1]
                     add_entry(card_tag, weight)

@@ -735,6 +735,8 @@ class Card_Data:
         }
         if str(self.static_poke_num_cntr) in price_dict:
             self.price = price_dict[str(self.static_poke_num_cntr)]
+        else:
+            self.price = 10.2
 
         if self.supertype != "Energy":
             self.hp = card.hp
@@ -755,7 +757,8 @@ class Card_Data:
             'hide_additional_tooltip': {},
             'custom_model_data': self.static_poke_num_cntr,
             'map_id': self.static_poke_num_cntr
-        }}
+            }
+        }
         if self.rarity in ["Rare Holo", "Rare Secret", "Rare Holo EX", "Rare Holo Star"]:
             self.set_components['components'].update({'enchantment_glint_override': True})
         if self.supertype == "Pokémon" and self.types is not None:
