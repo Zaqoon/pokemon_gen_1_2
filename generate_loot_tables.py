@@ -1,22 +1,13 @@
-from pokemontcgsdk import Card
-from pokemontcgsdk import RestClient
-
 from poke_data import rarity_weights
 from poke_data import sets
 from poke_data import generations
 from poke_data import Card_Data
-
-from dotenv import load_dotenv
 
 import re
 import json
 import os
 import shutil
 
-
-load_dotenv()
-api_key = os.getenv("API_KEY")
-RestClient.configure(api_key)
 
 target_set_list = [
     "base1", "base2", "base3", "base4", "base5", "gym1", "gym2",
@@ -60,32 +51,6 @@ def weight_calculation(rarity_dict: dict, set: str) -> dict:
         weight_dict['Rare'] = remaining_weight
 
     return weight_dict
-
-
-def sort_item(card):
-    match = re.match(r'^([A-Za-z]*)(\d+)(.*)', card.number)
-    if match:
-        prefix = match.group(1)  # Capture any letters or characters before the numeric part
-        numeric_part = int(match.group(2))  # Capture the numeric part as an integer
-        suffix = match.group(3)  # Capture any characters after the numeric part
-        if prefix:
-            return 0, prefix, numeric_part, suffix  # Sort by prefix, then numeric part, and finally suffix
-        else:
-            return 1, '', numeric_part, suffix  # Sort non-prefix cards after prefix cards
-    else:
-        return 0, '', 0, ''  # Default value if no match is found
-
-
-def populate_data(target):
-    for set in target:
-        print(f"Populating cards from \"{set}\"")
-        cards = Card.where(q=f'set.id:{set}')
-        sorted_cards = sorted(cards, key=sort_item)
-        for card in sorted_cards:
-            print(card.name)
-            current_card_data = Card_Data(card, price_dict)
-            current_card_data.generate_components()
-            card_data[set].append(current_card_data)
 
 
 def add_entry(poke_tag, weight_dict):
