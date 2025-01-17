@@ -4,7 +4,7 @@ from typing import List
 from poke_data import card_amount
 from poke_data import generations
 from poke_data import energy_types
-from fetch_api_data import target_set_list
+from generate_loot_tables import target_set_list
 
 
 pull_rate_dict = card_amount

@@ -4,7 +4,7 @@ import json
 from pokemontcgsdk import Card
 from pokemontcgsdk import RestClient
 
-from fetch_api_data import target_set_list, sort_item
+from generate_loot_tables import target_set_list, sort_item
 
 from dotenv import load_dotenv
 
