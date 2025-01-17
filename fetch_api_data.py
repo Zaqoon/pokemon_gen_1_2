@@ -26,7 +26,7 @@ target_set_list = [
 
 card_data = {set_name: [] for set_name in target_set_list}
 
-with open('prices.json', 'r') as file:
+with open('data/prices.json', 'r') as file:
     price_dict = json.load(file)
 
 

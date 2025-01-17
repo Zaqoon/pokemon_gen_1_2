@@ -9,7 +9,7 @@ import json
 import copy
 
 # Turn json data into dicts
-with open('data.json', 'r', encoding='utf-8') as file:
+with open('data/data.json', 'r', encoding='utf-8') as file:
     data = json.load(file)
     energy_types = data['energy_types']
     rarity_format = data['rarity_format']

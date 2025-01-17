@@ -56,7 +56,7 @@ def euro_to_usd(euro: float) -> float:
 
 
 def write_to_file(price_dict: dict):
-    with open('prices.json', 'w') as file:
+    with open('data/prices.json', 'w') as file:
         data = json.dumps(price_dict, indent=4)
         file.write(data)
 
