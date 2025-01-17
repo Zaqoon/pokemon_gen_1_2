@@ -4,7 +4,6 @@ from typing import List
 from poke_data import card_amount
 from poke_data import generations
 from poke_data import energy_types
-from generate_loot_tables import target_set_list
 
 
 pull_rate_dict = card_amount
@@ -69,6 +68,11 @@ def type_rares_functions():
 
 
 if __name__ == '__main__':
+    target_set_list = [
+        "base1", "base2", "base3", "base4", "base5", "gym1", "gym2",
+        "neo1", "neo2", "neo3", "neo4", "base6",
+        "ecard1", "ecard2", "ecard3", "basep"
+    ]
     flip_card_lines = []
     initiate_set_lines = []
     for set in target_set_list:
