@@ -1,3 +1,5 @@
+import pickle
+
 from poke_data import rarity_weights
 from poke_data import sets
 from poke_data import generations
@@ -7,18 +9,6 @@ import re
 import json
 import os
 import shutil
-
-
-target_set_list = [
-    "base1", "base2", "base3", "base4", "base5", "gym1", "gym2",
-    "neo1", "neo2", "neo3", "neo4", "base6",
-    "ecard1", "ecard2", "ecard3", "basep"
-]
-
-card_data = {set_name: [] for set_name in target_set_list}
-
-with open('data/prices.json', 'r') as file:
-    price_dict = json.load(file)
 
 
 def weight_calculation(rarity_dict: dict, set: str) -> dict:
@@ -161,7 +151,14 @@ def deck_special_cards(type_specific_cards: dict) -> None:
 
 
 if __name__ == "__main__":
-    populate_data(target_set_list)  # Populate data
+    target_set_list = [
+        "base1", "base2", "base3", "base4", "base5", "gym1", "gym2",
+        "neo1", "neo2", "neo3", "neo4", "base6",
+        "ecard1", "ecard2", "ecard3", "basep"
+    ]
+
+    with open('data/api_data.pkl', 'rb') as file:
+        card_data = pickle.load(file)
 
     energy_list = [
         "Fighting Energy", "Fire Energy", "Grass Energy",
