@@ -4,7 +4,7 @@ import json
 from pokemontcgsdk import Card
 from pokemontcgsdk import RestClient
 
-from generate_loot_tables import target_set_list, sort_item
+from fetch_api_data import sort_item
 
 from dotenv import load_dotenv
 
@@ -60,7 +60,16 @@ def write_to_file(price_dict: dict):
         data = json.dumps(price_dict, indent=4)
         file.write(data)
 
+    print('Price data was successfully saved.')
+
 
 if __name__ == '__main__':
+    target_set_list = [
+        "base1", "base2", "base3", "base4", "base5", "gym1", "gym2",
+        "neo1", "neo2", "neo3", "neo4", "base6",
+        "ecard1", "ecard2", "ecard3", "basep"
+    ]
+
     price_dict = get_prices(target_set_list)
+
     write_to_file(price_dict)
