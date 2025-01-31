@@ -360,7 +360,7 @@ def weakness_and_resistance(weaknesses: list, resistances: list,
 
 
 def weakness_resistance_spaces(weakness_string: str, resistance_string: str, price_string: str) -> str:
-    spaces = ""
+    spaces = " "
     string = weakness_string + resistance_string + price_string
     width = sum(letter_widths.get(char, 0) for char in string)
     while width + 4.2 <= 188:
