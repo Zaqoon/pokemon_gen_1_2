@@ -286,10 +286,17 @@ def add_to_deck(deck_dict:dict, min:int, max:int, components:str, item_type:str)
 
 def get_trainer_cards(deck_dict: dict, gen: str) -> dict:
     weights = trainer_weights.copy()
-
+    trainer_cards = []
     for i in range(1, 5):
         # subtype = subtype_selector[i]
-        random_card = random.choices(trainer_data[gen], weights=weights[gen])[0]
+        while True:
+            random_card = random.choices(trainer_data[gen], weights=weights[gen])[0]
+            if random_card in trainer_cards:
+                continue
+            else:
+                trainer_cards.append(random_card)
+                break
+
         card_index = trainer_data[gen].index(random_card)
         weights[card_index] = 0
         components = random_card.components
