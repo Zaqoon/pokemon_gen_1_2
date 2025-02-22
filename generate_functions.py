@@ -24,7 +24,8 @@ template = {
     "reset_score": "scoreboard players reset @a[scores={booster=%s}] booster",
     "que_next_card": "execute as @a[scores={booster=%s}] at @s run schedule function %s:%s 4t",
     "flip_card": "execute as @a[scores={right_click_carrot=1..}] at @s if items entity @s weapon.mainhand minecraft:carrot_on_a_stick[custom_data={%s}] run function %s:%s",
-    "flipped_card": "execute as @s run loot give @s loot tcg:%s/%s"
+    "flipped_card": "execute as @s run loot give @s loot tcg:%s/%s",
+    "flip_sound": "playsound item.dye.use master @s ~ ~ ~ 1 1 1"
 }
 
 type_rares_template = {
@@ -159,6 +160,7 @@ if __name__ == '__main__':
             with open(f"{directory}/{card}.mcfunction", "w") as file:
                 lines.append(template["clear_booster"] % (custom_data, custom_data))
                 lines.append(template["flipped_card"] % (set, f"{card}_rare"))
+                lines.append(template["flip_sound"])
                 mcfunction = "\n".join(lines)
                 file.write(mcfunction)
         line = template['flip_card'] % (set + ':1', set, '0')

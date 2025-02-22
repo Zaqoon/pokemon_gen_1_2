@@ -52,8 +52,15 @@ def import_decks():
                 f'{base_directory}/expansions/function/replace_villager_decks_{gen_string}.mcfunction',
             f'{gen}/functions/replace_villager_boosters_{gen_string}.mcfunction':
                 f'{base_directory}/expansions/function/replace_villager_boosters_{gen_string}.mcfunction',
-            f'{gen}/functions/type_rares_{gen_string}': f'{base_directory}/type_rares_{gen_string}'
+            f'{gen}/functions/type_rares_{gen_string}': f'{base_directory}/type_rares_{gen_string}',
         }
+
+        # Add all folders from gen/functions/ to the dictionary
+        functions_dir = f'{gen}/functions'
+        for item in os.listdir(functions_dir):
+            item_path = os.path.join(functions_dir, item)
+            if os.path.isdir(item_path):
+                directory_dict[item_path] = os.path.join(base_directory, item)
 
         for source, destination in directory_dict.items():
             # Copy and merge contents from source to destination
