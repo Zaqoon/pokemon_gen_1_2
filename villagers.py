@@ -395,7 +395,7 @@ def deck(deck_amount: int, gen: str) -> dict:
     custom_model_data_dict = {"Grass": 101, "Fire": 102, "Water": 103, "Fighting": 5, "Lightning": 14, "Psychic": 9,
                               "Colorless": 16, "Darkness": 1, "Metal": 3}
     bundle_dict = {
-        "Grass": "lime", "Fire": "red", "Water": "light_blue", "Fighting": "brown", "Lightning": "yellow",
+        "Grass": "green", "Fire": "red", "Water": "blue", "Fighting": "brown", "Lightning": "yellow",
         "Psychic": "purple", "Colorless": "light_gray", "Darkness": "black", "Metal": "dark_gray"
     }
     deck_types = ["Grass", "Fire", "Water", "Fighting", "Lightning", "Psychic", "Colorless"]
@@ -405,7 +405,7 @@ def deck(deck_amount: int, gen: str) -> dict:
 
     type_hex = {"Grass": "#4CAF50", "Fire": "#E53935", "Water": "#2979FF", "Fighting": "#8D6E63",
                 "Lightning": "#FDD835", "Psychic": "#BA68C8",
-                "Colorless": "gray", "Darkness": "#003f3f", "Metal": "#C0C0C0"}
+                "Colorless": "gray", "Darkness": "#087575", "Metal": "#C0C0C0"}
 
     sub_deck_type = deck_types[:]
     sub_deck_weight = deck_weight.copy()
