@@ -1,7 +1,7 @@
 from pokemontcgsdk import Card
 from pokemontcgsdk import RestClient
 
-from poke_data import Card_Data
+from poke_data import CardData
 
 from dotenv import load_dotenv
 
@@ -41,7 +41,7 @@ def fetch_api(target: list) -> dict:
         sorted_cards = sorted(cards, key=sort_item)
         for card in sorted_cards:
             print(card.name)
-            current_card_data = Card_Data(card, price_dict)
+            current_card_data = CardData(card, price_dict)
             current_card_data.generate_components()
             card_dict[set_name].append(current_card_data)
 

@@ -1,7 +1,7 @@
 import win32com.client
 import win32com.client.dynamic
 import os
-from poke_data import Card_Data
+from poke_data import CardData
 from poke_data import attack_cost_tag_line
 
 from pokemontcgsdk import Card
@@ -573,7 +573,7 @@ def populateCard_Data():
         cards = Card.where(q=f'set.id:{set}')
         sorted_cards = sorted(cards, key=sortItem)
         for card in sorted_cards:
-            currCard_Data = Card_Data(card)
+            currCard_Data = CardData(card)
             currCard_Data.generateLoreList()
             currCard_Data.generateNameLoreDict()
             allCard_Data[set].append(currCard_Data)

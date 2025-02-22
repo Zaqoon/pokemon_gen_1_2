@@ -3,7 +3,7 @@ import pickle
 from poke_data import rarity_weights
 from poke_data import sets
 from poke_data import generations
-from poke_data import Card_Data
+from poke_data import CardData
 
 import re
 import json
@@ -265,7 +265,7 @@ if __name__ == "__main__":
                         file.write(file_dict)
 
     # Rares for types in decks
-    file_directories = ['gen_1/type_rares_gen1', 'gen_2/type_rares_gen2']
+    file_directories = ['gen_1/loot_tables/type_rares_gen1', 'gen_2/loot_tables/type_rares_gen2']
     for directory in file_directories:
         if os.path.exists(directory):
             shutil.rmtree(directory)
@@ -275,7 +275,7 @@ if __name__ == "__main__":
         for loot_table in type_specific_cards[gen].keys():
             print(f"Creating loot table for {loot_table} Holo Cards ...")
             file_dict = {"type": "minecraft:chest", "pools": [{"rolls": 1, "entries": []}]}
-            with open(f"{gen}/type_rares_{gen.replace('_','')}/{loot_table.lower()}.json", "w") as file:
+            with open(f"{gen}/loot_tables/type_rares_{gen.replace('_','')}/{loot_table.lower()}.json", "w") as file:
                 for card_tag in type_specific_cards[gen][loot_table]:
                     weight = card_tag[1]
                     add_entry(card_tag, weight)

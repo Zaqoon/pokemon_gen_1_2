@@ -69,5 +69,32 @@ def import_decks():
             print(f'Successfully copied and merged from {source} to {destination}')
 
 
+def copy_paste_folder(source: str, destination: str):
+    try:
+        shutil.copytree(source, destination)
+        print(f'    Successfully transferred {source} to {destination}.')
+    except FileExistsError:
+        print(f'    {destination} already exists.')
+    except Exception as e:
+        print(f'    An error occurred: {e}')
+
+
+def export_loot_tables():
+    print('Exporting loot tables...')
+    path = f'C:/Users/Andreas/AppData/Roaming/.minecraft/saves/Naraka/datapacks/tcg/data/tcg/loot_table'
+    for gen in ['gen_1', 'gen_2']:
+        source = f'{gen}/loot_tables'
+        for set_id in os.listdir(source):
+            dest = f'{path}/{set_id}'
+            if os.path.exists(dest):
+                shutil.rmtree(dest)
+
+            # Paste folder
+            s = f'{source}/{set_id}'
+            copy_paste_folder(s, dest)
+            print(f'    Successfully transferred loot_tables/{set_id} to {path}/{set_id}.')
+
+
 if __name__ == '__main__':
     import_decks()
+    export_loot_tables()
