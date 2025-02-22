@@ -434,7 +434,7 @@ def deck(deck_amount: int, gen: str) -> dict:
                 "count": 1,
                 "components": {
                     "minecraft:custom_name": '{"text":"Sapphire","italic":false,"color":"aqua"}',
-                    "custom_model_data": 1,
+                    "custom_model_data": {"floats": [1]},
                     "custom_data": {"sapphire": "1b"}}},
             "sell": {
                 "id": "minecraft:bundle",
@@ -443,7 +443,7 @@ def deck(deck_amount: int, gen: str) -> dict:
                     "custom_name": f'{{"bold":true,"color":"{type_hex[deck_type]}",'
                                    f'"italic":false,"text":"{deck_type} Deck"}}',
                     "lore": f'[{{"italic":false,"text":"Generation {gen.replace("gen_","")}"}}',
-                    "custom_model_data": custom_model_data_dict[deck_type],
+                    "custom_model_data": {"floats": [custom_model_data_dict[deck_type]]},
                     "bundle_contents": []
                 }
             }
@@ -454,7 +454,7 @@ def deck(deck_amount: int, gen: str) -> dict:
             deck_dict, evolution_names = add_pokemon_cards(evolution_names, deck_type, sub_type, deck_dict, rarity, gen)
 
         gen_string = gen.replace('_', '')
-        rare_card_string = f"{{\"custom_name\":'{{\"text\":\"Holographic {deck_type} Card\",\"color\":\"aqua\",\"italic\":false}}',\"lore\":['{{\"text\":\"Right click to reveal card.\"}}'],\"custom_model_data\":1,\"enchantment_glint_override\":true,\"custom_data\":{{{deck_type.lower()}_rares_{gen_string}:1b}}}}"
+        rare_card_string = f"{{\"custom_name\":'{{\"text\":\"Holographic {deck_type} Card\",\"color\":\"aqua\",\"italic\":false}}',\"lore\":['{{\"text\":\"Right click to reveal card.\"}}'],\"custom_model_data\":{{\"floats\":[1]}},\"enchantment_glint_override\":true,\"custom_data\":{{{deck_type.lower()}_rares_{gen_string}:1b}}}}"
         deck_dict = add_to_deck(deck_dict, 1, 1, rare_card_string, "rare_card_dict")
         deck_dict = get_trainer_cards(deck_dict, gen)
         deck_dict = energy_cards(deck_type, sub_type, deck_dict)
@@ -474,21 +474,21 @@ def promo(gen: str) -> str:
         'gen_2': 'savanna'
     }
     promo_dict = """{maxUses:9,buy:{id:"minecraft:emerald",count:1,components:{"minecraft:custom_name":\
-    '{"color":"light_purple","italic":false,"text":"Star"}',"minecraft:custom_model_data":4,"minecraft:custom_data":\
+    '{"color":"light_purple","italic":false,"text":"Star"}',"minecraft:custom_model_data":{"floats":[4]},"minecraft:custom_data":\
     {redstar:1b}}},sell:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_name":\
     '{"bold":true,"italic":false,"text":"Promo Pack"}',"minecraft:lore":['{"color":"#9fd0e0","italic":false,"text":\
     "Wizards Black Star Promos"}','{"text":"July 1999 - March 2003","color":"dark_purple","italic":true}'],\
-    "minecraft:custom_model_data":10,"minecraft:custom_data":{basep:1}}}}"""
+    "minecraft:custom_model_data":{"floats":[10]},"minecraft:custom_data":{basep:1}}}}"""
 
     return data_strings["data_modify_dict"] % (biome_type[gen], "cleric") + promo_dict
 
 
 def booster(total_boosters:int, gen: str) -> List[str]:
     trade_dict = """{maxUses:%s,buy:{id:"minecraft:emerald",count:1,components:{"minecraft:custom_name":\
-    '{"color":"yellow","italic":false,"text":"Ruby"}',"minecraft:custom_model_data":2,"minecraft:custom_data":\
+    '{"color":"yellow","italic":false,"text":"Ruby"}',"minecraft:custom_model_data":{"floats":[2]},"minecraft:custom_data":\
     {ruby:1b}}},sell:{id:"minecraft:carrot_on_a_stick",count:1,components:{"minecraft:custom_name":\
     '{"bold":true,"italic":false,"text":"Booster Pack"}',"minecraft:lore":['{"text":"%s","color":"%s","italic":false}',\
-    '{"text":"%s","color":"dark_purple","italic":true}'],"minecraft:custom_model_data":%s,\
+    '{"text":"%s","color":"dark_purple","italic":true}'],"minecraft:custom_model_data":{"floats":[%s]},\
     "minecraft:custom_data":{%s:1}}}}"""
 
     biome_type = {
