@@ -394,6 +394,10 @@ def deck(deck_amount: int, gen: str) -> dict:
 
     custom_model_data_dict = {"Grass": 101, "Fire": 102, "Water": 103, "Fighting": 5, "Lightning": 14, "Psychic": 9,
                               "Colorless": 16, "Darkness": 1, "Metal": 3}
+    bundle_dict = {
+        "Grass": "lime", "Fire": "red", "Water": "light_blue", "Fighting": "brown", "Lightning": "yellow",
+        "Psychic": "purple", "Colorless": "light_gray", "Darkness": "black", "Metal": "dark_gray"
+    }
     deck_types = ["Grass", "Fire", "Water", "Fighting", "Lightning", "Psychic", "Colorless"]
 
     deck_weight = {"Grass": 300, "Fire": 300, "Water": 300, "Fighting": 150,
@@ -437,13 +441,12 @@ def deck(deck_amount: int, gen: str) -> dict:
                     "custom_model_data": {"floats": [1]},
                     "custom_data": {"sapphire": "1b"}}},
             "sell": {
-                "id": "minecraft:bundle",
+                "id": f"{bundle_dict[deck_type]}_bundle",
                 "count": 1,
                 "components": {
                     "custom_name": f'{{"bold":true,"color":"{type_hex[deck_type]}",'
                                    f'"italic":false,"text":"{deck_type} Deck"}}',
                     "lore": f'[{{"italic":false,"text":"Generation {gen.replace("gen_","")}"}}',
-                    "custom_model_data": {"floats": [custom_model_data_dict[deck_type]]},
                     "bundle_contents": []
                 }
             }
