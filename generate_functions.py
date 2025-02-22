@@ -19,7 +19,7 @@ template = {
     "set_score": "scoreboard players set @s booster %s",
     "add_score": "scoreboard players add @a[scores={booster=%s}] booster 1",
     "spawn_loot_table": "execute as @a[scores={booster=%s}] at @s run loot spawn ~ ~ ~ loot tcg:%s/%s",
-    "playsound": "execute as @s run playsound pokesound.booster_pack_open master @s ~ ~ ~ 10 1",
+    "playsound": "execute as @s run playsound pokemon:booster_pack_open master @s ~ ~ ~ 10 1",
     "clear_booster": "execute as @s if items entity @s weapon.* minecraft:carrot_on_a_stick[custom_data={%s}] run clear @s minecraft:carrot_on_a_stick[custom_data={%s}] 1",
     "reset_score": "scoreboard players reset @a[scores={booster=%s}] booster",
     "que_next_card": "execute as @a[scores={booster=%s}] at @s run schedule function %s:%s 4t",
