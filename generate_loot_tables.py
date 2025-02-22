@@ -74,7 +74,7 @@ def add_rare_card(set, loot_table, weight) -> None:
             {
                 "function": "set_components",
                 "components": {
-                    "minecraft:custom_model_data": 1,
+                    "custom_model_data": {"floats": [1]},
                     "minecraft:custom_data": {
                         f"{set}_{loot_table.lower()}_rare": 1
                     },
