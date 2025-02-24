@@ -446,7 +446,7 @@ def deck(deck_amount: int, gen: str) -> dict:
                 "components": {
                     "custom_name": f'{{"bold":true,"color":"{type_hex[deck_type]}",'
                                    f'"italic":false,"text":"{deck_type} Deck"}}',
-                    "lore": f'[{{"italic":false,"text":"Generation {gen.replace("gen_","")}"}}',
+                    "lore": f'[{{"italic":false,"text":"Generation {gen.replace("gen_","")}"}}]',
                     "bundle_contents": []
                 }
             }
@@ -569,6 +569,7 @@ def fix_dict(deck_dict):
     escaped_string = escaped_string.replace(':False', ':false')
     escaped_string = escaped_string.replace(' 1"}\', "custom_model_data"', ' 1"}\'], "custom_model_data"')
     escaped_string = escaped_string.replace(' 2"}\', "custom_model_data"', ' 2"}\'], "custom_model_data"')
+    escaped_string = escaped_string.replace('"}]\', "bundle_contents"', '"}\'], "bundle_contents"')
 
     return escaped_string
 
