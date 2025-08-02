@@ -754,7 +754,7 @@ class CardData:
         self.set_name = {'function': 'set_name', 'name': []}
         self.set_lore = {'function': 'set_lore', 'lore': [], 'mode': 'append'}
         self.set_components = {'function': 'set_components', 'components': {
-            'hide_additional_tooltip': {},
+            'tooltip_display': {"hidden_components": ["map_id"]},
             'custom_model_data': {'floats': [self.static_poke_num_cntr]},
             'map_id': self.static_poke_num_cntr
             }

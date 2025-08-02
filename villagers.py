@@ -697,5 +697,5 @@ if __name__ == "__main__":
     trainer_weights = sort_trainer_weights()
 
     for gen in ['gen_1', 'gen_2']:
-        construct_deck_files(200, 4, gen)
+        construct_deck_files(200, 5, gen)
         construct_booster_files(200, 4, gen)

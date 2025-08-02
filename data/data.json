@@ -97,7 +97,7 @@
             "name_color": "light_purple"
         },
         "Promo": {
-            "color": "black",
+            "color": "#191919",
             "symbol": " ✬",
             "name_color": "aqua"
         }
@@ -190,7 +190,7 @@
             "custom_model_data": [101, 102, 103],
             "max_uses": 10,
             "deck_set": true,
-            "weight": 10000
+            "weight": 2000
         },
         "base2": {
             "name": "Jungle",
@@ -199,7 +199,7 @@
             "custom_model_data": [201, 202, 203],
             "max_uses": 10,
             "deck_set": true,
-            "weight": 9000
+            "weight": 4000
         },
         "base3": {
             "name": "Fossil",
@@ -208,7 +208,7 @@
             "custom_model_data": [301, 302, 303],
             "max_uses": 10,
             "deck_set": true,
-            "weight": 8000
+            "weight": 6000
         },
         "base4": {
             "name": "Base Set 2",
@@ -226,7 +226,7 @@
             "custom_model_data": [501, 502, 503],
             "max_uses": 9,
             "deck_set": true,
-            "weight": 5000
+            "weight": 9500
         },
         "gym1": {
             "name": "Gym Heroes",
@@ -235,7 +235,7 @@
             "custom_model_data": [601, 602, 603],
             "max_uses": 8,
             "deck_set": true,
-            "weight": 3500
+            "weight": 10000
         },
         "gym2": {
             "name": "Gym Challenge",

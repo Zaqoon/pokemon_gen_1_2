@@ -1,3 +1,5 @@
+import time
+
 from pokemontcgsdk import Card
 from pokemontcgsdk import RestClient
 
@@ -36,14 +38,22 @@ def fetch_api(target: list) -> dict:
         price_dict = json.load(file)
 
     for set_name in target:
-        print(f"Populating cards from \"{set_name}\"")
-        cards = Card.where(q=f'set.id:{set_name}')
-        sorted_cards = sorted(cards, key=sort_item)
-        for card in sorted_cards:
-            print(card.name)
-            current_card_data = CardData(card, price_dict)
-            current_card_data.generate_components()
-            card_dict[set_name].append(current_card_data)
+        while True:
+            try:
+                print(f"Populating cards from \"{set_name}\"")
+                cards = Card.where(q=f'set.id:{set_name}')
+                sorted_cards = sorted(cards, key=sort_item)
+                for card in sorted_cards:
+                    print(card.name)
+                    current_card_data = CardData(card, price_dict)
+                    current_card_data.generate_components()
+                    card_dict[set_name].append(current_card_data)
+                time.sleep(60)
+                break
+            except:
+                print(f"Error occurred. Retrying after 2 minutes...")
+                time.sleep(120)
+                continue
 
     return card_dict
 
